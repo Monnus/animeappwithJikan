@@ -1,17 +1,43 @@
 import React,{useState} from 'react'
-import {View,Text,StyleSheet} from "react-native";
+import {View,Text,StyleSheet,Image} from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import * as webBrowser from  "expo-web-browser";
-export default  function CardComponents({ getTopAnime, getTopChar, getTopManga ,identifier,navigation }) {
+export default  function CardComponents({ getTopAnime, getTopChar, getTopManga ,identifier,navigation,animeList}) {
    
 
 
-console.log("in card com " ,identifier);
+console.log("in card com " ,animeList);
 return(
     <View style={{flex:1}}>
 
     {(()=>{
-        if(identifier==="TopAnime"){
+if(identifier=="search"){
+return(
+  <View>
+  {animeList.map(data=>{
+    return(
+      <View style={{ padding:"20",height:200,flexWrap:"wrap",width:"100%",backgroundColor:"#CCB0B0",marginBottom:5,marginTop:2}} key={data.mal_id}>
+            <View style={{ padding:"20",flex:1,width:"100%",backgroundColor:"white",width:"90%",flexWrap:"wrap"}}><View style={{ padding:"20",flex:1,flexDirection:"row",width:"100%"}}>
+                <Card.Cover source={{ uri: `${data.image_url}` }} style={{ resizeMode: 'cover',height:"200",width:100}}/>
+                <View style={{flexWrap:"wrap",height:"auto",width:"100%"}}>
+                  <Text style={{flex:1,fontSize:15,color:"darkgray",fontWeight:600,flexWrap:"wrap"}}>{data.title}</Text>
+                    <Text>score:{data.score}</Text>
+                    <Text>Rated:{data.rated}</Text>
+                    <Text>Type:{data.type}</Text>
+                </View>
+                  </View>
+                    <View style={{ flexDirection:"row",flex:1,}}>
+                  <Button  style={{width:100,height:"50px"}}mode="contained" onPress={()=>webBrowser.openBrowserAsync(data.url)}>More</Button>
+                  <Button>Ok</Button>
+                  </View>
+            </View>
+    </View>
+    )
+  })}
+ </View>
+  )
+
+}else if(identifier==="TopAnime"){
             return(
                 <View style={styles.cardContainer}>
                 {getTopAnime.map((data)=>{

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View ,Image, SafeAreaView} from 'react-native';
 import Header from './components/Header';
 import CardComponents from './components/CardComponents';
 import Search from './components/Search';
-function HomePage({navigation }) {
+function HomePage({navigation}) {
     const [getTopChar,setTopChar]=useState([]);
     const [getTopManga,setTopManga]=useState([]);
     const [getTopAnime,setTopAnime]=useState([]);
@@ -14,17 +14,18 @@ function HomePage({navigation }) {
 
 const fatchApiCharacters=async function(){
     try{
-     const charData=await fetch(`https://api.jikan.moe/v4/top/characters`).then((res)=>res.json());
-     const mangaData=await fetch("https://api.jikan.moe/v4/top/manga").then((res)=>res.json());
-     const animeData= await fetch("https://api.jikan.moe/v4/top/anime").then((res)=>res.json());
-           setTopChar(charData.data.slice(0,10));
-           setTopManga(mangaData.data.slice(0,10));
-           setTopAnime(animeData.data.slice(0,10));  
-console.log("here is anime data",animeData.data);
-console.log("top Characters",charData.data);
-console.log("top manga",mangaData.data);
+    //  const charData=await fetch(`https://api.jikan.moe/v4/top/characters`).then((res)=>res.json());
+    //  const mangaData=await fetch("https://api.jikan.moe/v4/top/manga").then((res)=>res.json());
+    //  const animeData= await fetch("https://api.jikan.moe/v4/top/anime").then((res)=>res.json());
+   const data= await Promise.all([
+    fetch(`https://api.jikan.moe/v4/top/characters`).then((res)=>res.json()), 
+   fetch("https://api.jikan.moe/v4/top/manga").then((res)=>res.json()),
+   fetch("https://api.jikan.moe/v4/top/anime").then((res)=>res.json()) ]);
 
-            
+           setTopChar(data[0].data.slice(0,10));
+           setTopManga(data[1].data.slice(0,10));
+           setTopAnime(data[2].data.slice(0,10));  
+            console.log("requested char,Manga,Anime",data);
     }catch(err){
         console.log(err);
     }
@@ -39,12 +40,13 @@ useEffect(()=>{
     fatchApiCharacters();
 },[])
 
-const FetchAnime= async function(query){
-const temp=await fetch(`https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=10`)
-.then(res=>res.json());
-console.log("anime list recieved",temp.results);
-setAnimeList(temp.results);
-}
+    const FetchAnime= async function(query){
+    const temp=await fetch(`https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc`)
+    .then(res=>res.json());
+    console.log("anime list recieved",temp.results);
+    setAnimeList(temp.results);
+    handelSetNavig("search");
+    }
 function handleSearch(){
     FetchAnime(search)
 }
