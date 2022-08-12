@@ -8,7 +8,7 @@ export default  function CardComponents({ getTopAnime, getTopChar, getTopManga ,
 
 console.log("in card com " ,animeList);
 return(
-    <View style={{flex:1}}>
+    <>
 
     {(()=>{
 if(identifier=="search"){
@@ -16,22 +16,20 @@ return(
   <View>
   {animeList.map(data=>{
     return(
-      <View style={{ padding:"20",height:200,flexWrap:"wrap",width:"100%",backgroundColor:"#CCB0B0",marginBottom:5,marginTop:2}} key={data.mal_id}>
-            <View style={{ padding:"20",flex:1,width:"100%",backgroundColor:"white",width:"90%",flexWrap:"wrap"}}><View style={{ padding:"20",flex:1,flexDirection:"row",width:"100%"}}>
-                <Card.Cover source={{ uri: `${data.image_url}` }} style={{ resizeMode: 'cover',height:"200",width:100}}/>
-                <View style={{flexWrap:"wrap",height:"auto",width:"100%"}}>
-                  <Text style={{flex:1,fontSize:15,color:"darkgray",fontWeight:600,flexWrap:"wrap"}}>{data.title}</Text>
-                    <Text>score:{data.score}</Text>
-                    <Text>Rated:{data.rated}</Text>
-                    <Text>Type:{data.type}</Text>
-                </View>
-                  </View>
-                    <View style={{ flexDirection:"row",flex:1,}}>
-                  <Button  style={{width:100,height:"50px"}}mode="contained" onPress={()=>webBrowser.openBrowserAsync(data.url)}>More</Button>
-                  <Button>Ok</Button>
-                  </View>
-            </View>
+
+
+<View style={{height:200,width:"100%",backgroundColor:"#CCB0B0",justifyContent:"flex-start",marginBottom:"10px"}} key={data.mal_id}>
+<View style={{height:"100%",width:"90%",backgroundColor:"white",padding:"10,0,0,10"}}>
+        <View style={{flex:2,width:"100%",flexDirection:"row"}}>
+    <View style={{height:"100%",width:100,backgroundColor:"white"}}> <Card.Cover source={{ uri: `${data.image_url}` }} style={{ resizeMode: 'cover',height:"100%",width:"100%"}}/></View>
+    <View style={{flex:1,flexWrap:"wrap",width:"100%"}}><Text style={{flexWrap:"wrap",fontSize:15,color:"darkgray",fontWeight:600,flexWrap:"wrap"}}>{data.title}</Text>
+    <Text>Rated:{data.rated}</Text>
+    <Text>Type:{data.type}</Text>
     </View>
+        </View>
+    <Button mode="contained" style={{height:50}}  onPress={()=>webBrowser.openBrowserAsync(data.url)}>more</Button>
+</View>
+</View>
     )
   })}
  </View>
@@ -42,20 +40,23 @@ return(
                 <View style={styles.cardContainer}>
                 {getTopAnime.map((data)=>{
                     return(
-                        <Card key={data.mal_id} style={styles.card}>
-                        <Card.Cover source={{ uri: `${data.images.jpg.image_url}` }} />
-                        <Card.Title />
-                        <Card.Content>
-                          <Title>{data.title}</Title>
-                          <Paragraph>Charactor nicknames:{data.title_synonyms.join(" ")}</Paragraph>
-                          <Paragraph>duration:{data.duration} with {data.episodes}</Paragraph>
-                     
-                        </Card.Content>
-                        <Card.Actions>
-                          <Button onPress={()=>webBrowser.openBrowserAsync(data.url)}>More</Button>
-                          <Button>Ok</Button>
-                        </Card.Actions>
-                      </Card>
+        
+    <View style={{height:"auto",width:"500",backgroundColor:"#CCB0B0",justifyContent:"flex-start",marginBottom:"10px"}} key={data.mal_id}>
+    <View style={{height:"100%",width:"90%",backgroundColor:"white",padding:"10 0 0 10"}}>
+            <View style={{flex:2,width:"100%",}}>
+        <View style={{height:200,width:100,backgroundColor:"white"}}> <Card.Cover source={{ uri: `${data.images.jpg.image_url}` }} style={{ resizeMode: 'cover',height:"100%",width:"100%"}}/></View>
+        <View style={{flex:1,flexWrap:"wrap",width:"100%"}}><Text style={{
+        flexWrap:"wrap",
+        fontSize:15,
+        color:"darkgray",
+        fontWeight:600,
+        flexWrap:"wrap"}}>{data.title_synonyms.join(" ")}</Text>
+        <Text>duration:{data.duration} with {data.episodes}</Text>
+        </View>
+            </View>
+        <Button mode="contained" style={{height:50}}  onPress={()=>webBrowser.openBrowserAsync(data.url)}>more</Button>
+    </View>
+    </View>
                     )
                 })}
                 
@@ -115,7 +116,7 @@ return(
             )
         }
     })()}
-    </View>
+    </>
 )
 
 }

@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { StyleSheet, Text, View ,Image, SafeAreaView} from 'react-native';
 import Header from './components/Header';
+import {Button} from "react-native-paper"
 import CardComponents from './components/CardComponents';
 import Search from './components/Search';
 function HomePage({navigation}) {
@@ -52,17 +53,23 @@ function handleSearch(){
 }
 
   return (
- <SafeAreaView style={styles.container}>
+ <View style={styles.container}>
+
+
     <Search handleSearch={handleSearch} search={search} getSearch={getSearch}/>
     <Header handelSetNavig={handelSetNavig}/>
     <CardComponents getTopAnime={getTopAnime} getTopChar={getTopChar} getTopManga={getTopManga} identifier={identifier} navigation={navigation } animeList={animeList}/>
- </SafeAreaView>
+
+
+ </View>
   )
 }
 
 export default HomePage
 const styles=StyleSheet.create({
     container:{
+        hight:"auto",
+        backgroundColor:"black",
         width:"100%",
     }
 })

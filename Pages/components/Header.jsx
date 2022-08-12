@@ -5,7 +5,7 @@ import { StyleSheet, Text, View ,Image, SafeAreaView, TouchableOpacity} from 're
 function Header({handelSetNavig}) {
   return (
    <View style={styles.container}>
-        <Text style={{fontSize:30,fontWeight:"500"}}> <Text style={{color:"#38b6ff",fontSize:30,fontWeight:"500"}}>Ani</Text>Read</Text>
+        <Text style={{fontSize:30,fontWeight:"500"}}> <Text style={{color:"#38b6ff",fontSize:30,fontWeight:"700"}}>Ani</Text>Read</Text>
  <View style={styles.headerBtnView}>
         <TouchableOpacity style={styles.btnHeader} onPress={()=>handelSetNavig("TopAnime")}><Text style={styles.btnHeader}>Top anime</Text></TouchableOpacity>
         <TouchableOpacity style={styles.btnHeader} onPress={()=>handelSetNavig("TopManga")}> <Text style={styles.btnHeader}>Top manga</Text></TouchableOpacity>
@@ -25,6 +25,7 @@ const styles=StyleSheet.create({
 justifyContent:"space-around",
          backgroundColor:"#CCB0B0",
          width:"100%",
+         marginBottom:"10px"
     },
     headerBtnView:{
         flexDirection:"row",
