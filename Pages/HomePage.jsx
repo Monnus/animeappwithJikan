@@ -11,6 +11,7 @@ function HomePage({navigation}) {
     const [animeList,setAnimeList]=useState([]);
     const [identifier,setIdentifier]=useState("");
     const [search,getSearch]=useState("");
+    const [seasonanimeList,getSeasonanimeList]=useState([])
   console.log(search);
 
 const fatchApiCharacters=async function(){
@@ -41,35 +42,39 @@ useEffect(()=>{
     fatchApiCharacters();
 },[])
 
-    const FetchAnime= async function(query){
-    const temp=await fetch(`https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc`)
-    .then(res=>res.json());
-    console.log("anime list recieved",temp.results);
-    setAnimeList(temp.results);
-    handelSetNavig("search");
+ const FetchAnime= async function(query,year=2022,season="winter"){
+            const seasondata=await fetch(`https://api.jikan.moe/v3/season/${year}/${season}`).then((res)=>res.json());
+            const temp=await fetch(`https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc`) .then(res=>res.json());
+            console.log("anime list recieved",temp.results);
+            setAnimeList(temp.results);
+            getSeasonanimeList(seasondata);
+            handelSetNavig("search");
     }
-function handleSearch(){
-    FetchAnime(search)
-}
+    console.log(seasonanimeList,"season anime recieved starts with winter");
+
+                function handleSearch(){
+                    FetchAnime(search)
+                }
 
   return (
- <View style={styles.container}>
-
+ <SafeAreaView style={styles.container}>
+    <View style={{}}>
 
     <Search handleSearch={handleSearch} search={search} getSearch={getSearch}/>
     <Header handelSetNavig={handelSetNavig}/>
-    <CardComponents getTopAnime={getTopAnime} getTopChar={getTopChar} getTopManga={getTopManga} identifier={identifier} navigation={navigation } animeList={animeList}/>
+    <CardComponents getTopAnime={getTopAnime} getTopChar={getTopChar} getTopManga={getTopManga} identifier={identifier} navigation={navigation } animeList={animeList} seasonanimeList={seasonanimeList}/>
+    </View>
 
-
- </View>
+ </SafeAreaView>
   )
 }
 
 export default HomePage
 const styles=StyleSheet.create({
     container:{
-        hight:"auto",
-        backgroundColor:"black",
+        flex:1,
+        height:"auto",
+        backgroundColor:"#f5f5f5",
         width:"100%",
     }
 })
