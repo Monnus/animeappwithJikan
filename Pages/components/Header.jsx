@@ -17,12 +17,13 @@ function Header({handelSetNavig}) {
   { label: 'HTML', value: '7' },
   { label: 'CSS', value: '8' },
  ]
+ console.log("hello");
   return (
    <View style={styles.container}>
         <Text style={{fontSize:30,fontWeight:"500"}}> <Text style={{color:"#38b6ff",fontSize:30,fontWeight:"700"}}>Ani</Text>Read</Text>
  <View style={styles.headerBtnView}>
   <Dropdown data={DATA} style={[styles.dropdown,Focus&& {borderColor:"blue"}]}
-         placeholderStyle={styles.placeholderStyle}
+         placeholderStyle={styles.placeholderSgittyle}
          selectedTextStyle={styles.selectedTextStyle}
          inputSearchStyle={styles.inputSearchStyle}
          iconStyle={styles.iconStyle}
