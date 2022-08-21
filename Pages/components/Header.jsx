@@ -3,26 +3,60 @@ import { StyleSheet, Text, View ,Image, SafeAreaView, TouchableOpacity} from 're
 import {Dropdown} from "react-native-element-dropdown"
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-function Header({handelSetNavig}) {
-  const [value, setValue] = useState(null);
-  const [Focus, setFocus] = useState(false);
-  console.log(value);
+function Header({handelSetNavig,setValue,value,setFocus,Focus,setSeasonValue,seasonValue,seasonFocus,setseasonFocus}) {
+
+  console.log(value,seasonValue);
  const DATA=[
-  { label: 'React Naive', value: '1' },
-  { label: 'Javascript', value: '2' },
-  { label: 'Laravel', value: '3' },
-  { label: 'PHP', value: '4' },
-  { label: 'jQuery', value: '5' },
-  { label: 'Bootstrap', value: '6' },
-  { label: 'HTML', value: '7' },
-  { label: 'CSS', value: '8' },
+  { label: '2022', value: 2022 },
+  { label: '2021', value: 2021},
+  { label: '2020', value: 2020},
+  { label: '2019', value: 2019},
+  { label: '2018', value: 2018},
+  { label: '2017', value: 2017},
+  { label: '2016', value: 2016},
+  { label: '2015', value: 2015},
  ]
- console.log("hello");
+ const Data2=[
+{ label:"Spring",value:"Spring" },
+{ label:"Summer",value:"Summer" },
+{ label:"Fall",value:"Fall"},
+{ label:"Winter",value:"Winter"}
+]
   return (
    <View style={styles.container}>
         <Text style={{fontSize:30,fontWeight:"500"}}> <Text style={{color:"#38b6ff",fontSize:30,fontWeight:"700"}}>Ani</Text>Read</Text>
  <View style={styles.headerBtnView}>
-  <Dropdown data={DATA} style={[styles.dropdown,Focus&& {borderColor:"blue"}]}
+
+
+        <TouchableOpacity style={styles.btnHeader} onPress={()=>handelSetNavig("TopAnime")}><Text style={styles.btnHeader}>Top anime</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.btnHeader} onPress={()=>handelSetNavig("TopManga")}> <Text style={styles.btnHeader}>Top manga</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.btnHeader} onPress={()=>handelSetNavig("TopChar")}><Text style={styles.btnHeader}>Top Charactares</Text></TouchableOpacity>
+ </View>
+<Text style={{fontSize:20, fontWeight:800}}> Anime 
+<Dropdown
+data={Data2} style={[styles.dropdown,seasonFocus&& {borderColor:"blue"}]}
+        placeholderStyle={styles.placeholderSgittyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        search
+        maxHeight={300}
+        labelField="label"
+        valueField='value'
+        placeholder={!seasonFocus?"winter":"Winter"}
+        searchPlaceholder="Search.."
+        value={seasonValue}
+        onFocus={()=>setseasonFocus(true)}
+        onBlur={()=>setseasonFocus(true)}
+       onChange={item=>{setSeasonValue(item.value);setseasonFocus(false)}}
+       renderLeftIcon={()=>(
+        <AntDesign style={styles.icon} color={seasonFocus ? "black" : "blue"}
+        name="Safety"
+        size={15}
+       />
+       )}
+       /> in year
+         <Dropdown data={DATA} style={[styles.dropdown,Focus&& {borderColor:"blue"}]}
          placeholderStyle={styles.placeholderSgittyle}
          selectedTextStyle={styles.selectedTextStyle}
          inputSearchStyle={styles.inputSearchStyle}
@@ -31,7 +65,7 @@ function Header({handelSetNavig}) {
        maxHeight={300}
        labelField="label"
        valueField='value'
-       placeholder={!Focus?"select item":"..."}
+       placeholder={!Focus?"2022":"2022"}
        searchPlaceholder="Search.."
        value={value}
        onFocus={()=>setFocus(true)}
@@ -44,12 +78,7 @@ function Header({handelSetNavig}) {
         />
        )}
   />
-
-        <TouchableOpacity style={styles.btnHeader} onPress={()=>handelSetNavig("TopAnime")}><Text style={styles.btnHeader}>Top anime</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.btnHeader} onPress={()=>handelSetNavig("TopManga")}> <Text style={styles.btnHeader}>Top manga</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.btnHeader} onPress={()=>handelSetNavig("TopChar")}><Text style={styles.btnHeader}>Top Charactares</Text></TouchableOpacity>
- </View>
-<Text style={{fontSize:20, fontWeight:800,backgroundColor:"rgba(0,0,1,0.4"}}>Seasonal animal is winter</Text>
+       </Text>
    </View>
   )
 }
@@ -58,17 +87,17 @@ export default Header;
 
 const styles=StyleSheet.create({
     container:{
-    height:100,
+    height:"auto",
     alignItems:"center",
-justifyContent:"space-around",
+    justifyContent:"space-around",
          backgroundColor:"#CCB0B0",
          width:"100%",
          marginBottom:"10px"
     },
     headerBtnView:{
-        flexDirection:"row",
-justifyContent:"space-around",
-width:"100%",
+    flexDirection:"row",
+    justifyContent:"space-around",
+    width:"100%",
     },
       btnHeader:{
         color:"white",
@@ -84,7 +113,7 @@ width:"100%",
     },
     dropdown: {
         height: 50,
-        borderColor: 'gray',
+        borderColor: 'skyblue',
         borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
