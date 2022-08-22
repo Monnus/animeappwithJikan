@@ -27,7 +27,6 @@ const fetchApiCharacterdata2=async function(){
             fetch("https://api.jikan.moe/v4/top/manga").then((res)=>res.json()),
             fetch("https://api.jikan.moe/v4/top/anime").then((res)=>res.json()),
             ]);
-         
                     setTopChar(data[0].data.slice(0,10));
                     setTopManga(data[1].data.slice(0,10));
                     setTopAnime(data[2].data.slice(0,10));
@@ -38,14 +37,12 @@ const fetchApiCharacterdata2=async function(){
 }
 const fatchApiCharacters=async function(){
     try{
-
     const seasondata=await fetch(`https://api.jikan.moe/v4/seasons/2022/Winter`).then((res)=>res.json())
     setTimeout(() => {
         fetchApiCharacterdata2();
     }, 4000);   
         getSeasonanimeList(seasondata.data);
         setIdentifier("season")
-
     }catch(err){
         console.log(err);
     }
@@ -83,19 +80,16 @@ useEffect(()=>{
         fatchSeasonAnime(value,seasonValue)
     }
 },[value,seasonValue]) 
-
 console.log(seasonValue);
     function handleSearch(){
                     FetchAnime(search)
                 }
-
-
   return (
  <SafeAreaView style={styles.container}>
     <View style={{}}>
 
     <Search handleSearch={handleSearch} search={search} getSearch={getSearch}/>
-    <Header handelSetNavig={handelSetNavig} setValue={setValue} value={value} setFocus={setFocus} Focus={Focus} setSeasonValue={setSeasonValue} seasonValue={seasonValue} seasonFocus={seasonFocus} setseasonFocus={setseasonFocus}/>
+    <Header navigation={navigation} handelSetNavig={handelSetNavig} setValue={setValue} value={value} setFocus={setFocus} Focus={Focus} setSeasonValue={setSeasonValue} seasonValue={seasonValue} seasonFocus={seasonFocus} setseasonFocus={setseasonFocus}/>
     <CardComponents getTopAnime={getTopAnime} getTopChar={getTopChar} getTopManga={getTopManga} identifier={identifier} navigation={navigation } animeList={animeList} seasonanimeList={seasonanimeList}/>
     </View>
 

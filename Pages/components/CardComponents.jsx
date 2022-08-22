@@ -129,7 +129,7 @@ return (
                         <View style={{height:"auto",width:"100%",backgroundColor:"#CCB0B0",justifyContent:"flex-start",marginBottom:"20px"}} key={data.mal_id}>
                          <View style={{flex:1,backgroundColor:"white",width:"90%"}}>
                          <View style={{height:190,width:"100%",backgroundColor:"white",marginBottom:"5px"}}>
-                        <Card.Cover source={{ uri: `${data.images.jpg.image_url}` }} style={styles.image}/>
+                        <Card.Cover source={{ uri: `${data.images.jpg.image_url}` }}/>
                         </View>
                      <View  style={{backgroundColor:"gray",height:"auto",width:"100%",padding:"auto"}} >
                         <Card.Title title="Top  10 Characters " />

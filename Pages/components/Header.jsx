@@ -2,8 +2,9 @@ import React,{useState}from 'react'
 import { StyleSheet, Text, View ,Image, SafeAreaView, TouchableOpacity} from 'react-native';
 import {Dropdown} from "react-native-element-dropdown"
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {getAuth,signOut} from "firebase/auth";
 
-function Header({handelSetNavig,setValue,value,setFocus,Focus,setSeasonValue,seasonValue,seasonFocus,setseasonFocus}) {
+function Header({navigation,handelSetNavig,setValue,value,setFocus,Focus,setSeasonValue,seasonValue,seasonFocus,setseasonFocus}) {
 
   console.log(value,seasonValue);
  const DATA=[
@@ -22,9 +23,24 @@ function Header({handelSetNavig,setValue,value,setFocus,Focus,setSeasonValue,sea
 { label:"Fall",value:"Fall"},
 { label:"Winter",value:"Winter"}
 ]
+
+function handleSignout(){
+    const auth=getAuth();
+    signOut(auth).then((response)=>{
+            console.log(response);
+            navigation.navigate("registation");     
+    }).catch(err=>console.log(err))
+
+}
   return (
    <View style={styles.container}>
-        <Text style={{fontSize:30,fontWeight:"500"}}> <Text style={{color:"#38b6ff",fontSize:30,fontWeight:"700"}}>Ani</Text>Read</Text>
+             <Text style={{color:"purple",fontSize:20}} onPress={()=>handleSignout()}>Logout <AntDesign style={styles.icon}
+              color={Focus ? "blue" : "#38b6ff"}name="logout"
+              size={20}
+        /></Text>
+          
+        <Text style={{fontSize:30,fontWeight:"500"}}>
+             <Text style={{color:"#38b6ff",fontSize:30,fontWeight:"700"}}>Ani</Text>Read</Text>
  <View style={styles.headerBtnView}>
 
 
