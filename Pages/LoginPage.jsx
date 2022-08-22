@@ -11,6 +11,8 @@ function LoginPage({navigation}) {
     if(id===2){
       signInWithEmailAndPassword(auth,email,password)
       .then((response=>{
+        setEmail("");
+        setpassword("");
         navigation.navigate('Home'),
         console.log(response);
 

@@ -14,8 +14,11 @@ const id=1;
 const handleAction = (id) => {
     const auth =getAuth();
     if (id === 1) {
+        
         createUserWithEmailAndPassword(auth, email, password)
         .then((response) => {
+            setEmail("")
+            setPassword("")
             navigation.navigate('login'),
             console.log(response,"you have succesfully logged in");
             
