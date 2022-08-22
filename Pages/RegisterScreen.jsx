@@ -23,6 +23,8 @@ const handleAction = (id) => {
             console.log(response,"you have succesfully logged in");
             
         }).catch((error) => {
+            setEmail("");
+            setPassword("");
           if(error.code === 'auth/wrong-password'){
             toast.error('Please check the Password');
           }
